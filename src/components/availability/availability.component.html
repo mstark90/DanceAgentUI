@@ -4,7 +4,7 @@
         Availability
     </h2>
     <div class="ui secondary  menu">
-        <a class="item">
+        <a routerLink="/availability/create" class="item">
             <i class="plus icon"></i>
             Add
         </a>
@@ -25,7 +25,6 @@
                     <a [routerLink]="getAvailabilityUrl(availability)">
                         {{availability.location}}
                     </a>
-                    
                 </td>
                 <td>{{formatDate(availability.startTime)}}</td>
                 <td>{{formatDate(availability.endTime)}}</td>

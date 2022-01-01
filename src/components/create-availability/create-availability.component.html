@@ -1,0 +1,45 @@
+<div class="ui container">
+    <br />
+    <h2 class="ui dividing header">
+        Create Availability
+    </h2>
+    <div class="ui positive message" *ngIf="this.success">
+        Your event has been successfully created! Let people know to book you!
+    </div>
+    <div class="ui error message" *ngIf="this.error">
+        {{this.errorMessage}}
+    </div>
+    <form class="ui form" #availabilityForm>
+        <div class="field">
+            <label>Location</label>
+            <input type="text" name="location" placeholder="Location" (change)="this.setValue('location', $event.target)">
+        </div>
+        <div class="field">
+            <label>Dance Limit</label>
+            <input type="number" name="danceLimit" placeholder="Dance Limit" value="-1" (change)="this.setValue('danceLimit', $event.target)">
+        </div>
+        <div class="two fields">
+            <div class="field">
+              <label>Start</label>
+              <div class="ui calendar" id="startTime">
+                <div class="ui input left icon">
+                  <i class="calendar icon"></i>
+                  <input type="text" placeholder="Start" name="startTime" (change)="this.setValue('startTime', $event.target, true)">
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>End</label>
+              <div class="ui calendar" id="endTime">
+                <div class="ui input left icon">
+                  <i class="calendar icon"></i>
+                  <input type="text" placeholder="End" name="endTime" (change)="this.setValue('endTime', $event.target, true)">
+                </div>
+              </div>
+            </div>
+          </div>
+        <button class="ui primary button" type="button" (click)="this.create()">
+            Create
+        </button>
+    </form>
+</div>

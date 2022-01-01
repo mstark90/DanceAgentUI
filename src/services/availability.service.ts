@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Availability } from "src/models/availability.model";
+import { Availability, AvailabilityRequest } from "src/models/availability.model";
 import { BaseService } from "./base.service";
 import { OktaAuthService } from "./okta-auth.service";
 
@@ -23,5 +23,9 @@ export class AvailabilityService extends BaseService {
     public get(availabilityId: number): Observable<Availability> {
         return this.http.get<Availability>(`${this.baseUrl}/availability/${availabilityId}`,
             this.getRequestOptions());
+    }
+
+    public create(request: AvailabilityRequest): Observable<Availability> {
+        return this.http.post<Availability>(`${this.baseUrl}/availability`, request, this.getRequestOptions());
     }
 };

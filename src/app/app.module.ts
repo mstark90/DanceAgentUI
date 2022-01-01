@@ -13,6 +13,8 @@ import { AvailabilityService } from 'src/services/availability.service';
 import { AvailabilityComponent } from 'src/components/availability/availability.component';
 import { AvailabilityDetailsComponent } from 'src/components/availability-details/availability-details.component';
 import { DancesService } from 'src/services/dances.service';
+import { CreateAvailabilityComponent } from 'src/components/create-availability/create-availability.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,11 @@ import { DancesService } from 'src/services/dances.service';
     HomeComponent,
     BookComponent,
     AvailabilityComponent,
-    AvailabilityDetailsComponent
+    AvailabilityDetailsComponent,
+    CreateAvailabilityComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule

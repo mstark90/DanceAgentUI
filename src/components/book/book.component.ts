@@ -5,6 +5,8 @@ import { DanceRequest } from 'src/models/dance-request.model';
 import { AvailabilityService } from 'src/services/availability.service';
 import { DancesService } from 'src/services/dances.service';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-booking',
   templateUrl: './book.component.html',
@@ -23,6 +25,10 @@ export class BookComponent {
 
     constructor(private availabilityService: AvailabilityService,
         private danceService: DancesService) {
+    }
+
+    formatDate(date: Date): string {
+        return moment(date).format("MM/DD/yyyy hh:mm a");
     }
 
     setAvailability(event: Event) {

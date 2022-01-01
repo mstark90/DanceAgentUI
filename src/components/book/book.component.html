@@ -33,7 +33,7 @@
                 <option></option>
                 <option
                     *ngFor="let availability of availabilityList" value="{{availability.availabilityId}}">
-                    {{availability.dancerName}} - {{availability.location}} ({{availability.startTime}})
+                    {{availability.dancerName}} - {{availability.location}} ({{formatDate(availability.startTime)}})
                 </option>
             </select>
         </div>

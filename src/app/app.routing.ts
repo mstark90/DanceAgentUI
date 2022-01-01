@@ -4,6 +4,7 @@ import { AvailabilityComponent } from 'src/components/availability/availability.
 import { CallbackComponent } from 'src/components/callback/callback.component';
 import { AvailabilityDetailsComponent } from 'src/components/availability-details/availability-details.component';
 import { HomeComponent } from 'src/components/home/home.component';
+import { CreateAvailabilityComponent } from 'src/components/create-availability/create-availability.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'availability',
         component: AvailabilityComponent,
+    },
+    {
+        path: 'availability/create',
+        component: CreateAvailabilityComponent,
     },
     {
         path: 'availability/:availabilityId',

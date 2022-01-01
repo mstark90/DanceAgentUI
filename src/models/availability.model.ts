@@ -14,3 +14,15 @@ export interface Availability {
 
     created: Date;
 };
+
+export interface AvailabilityRequest {
+    availabilityId: number;
+    
+    location: string;
+    
+    startTime: Date;
+    
+    endTime: Date;
+    
+    danceLimit: number;
+}
