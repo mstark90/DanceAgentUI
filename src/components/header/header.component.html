@@ -1,0 +1,19 @@
+<div class="ui fixed inverted large menu">
+    <a [routerLink]="['/']" class="active header item">
+      DanceAgent
+    </a>
+    <a *ngIf="isAuthenticated" [routerLink]="['/availability']" class="item">
+      Availability
+    </a>
+    <div class="right menu">
+      <div *ngIf="isAuthenticated && userClaims" class="ui simple dropdown item" id="userDropdown">
+        {{userClaims.name}} <i class="dropdown icon"></i>
+        <div class="menu">
+          <a (click)="triggerLogout()" class="item">Logout</a>
+        </div>
+      </div>
+      <div *ngIf="!isAuthenticated" class="ui simple item" (click)="triggerLogin()">
+          Login
+      </div>
+    </div>
+  </div>

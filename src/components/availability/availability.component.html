@@ -1,0 +1,40 @@
+<div class="ui container">
+    <br />
+    <h2 class="ui dividing header">
+        Availability
+    </h2>
+    <div class="ui secondary  menu">
+        <a class="item">
+            <i class="plus icon"></i>
+            Add
+        </a>
+    </div>
+    <table class="ui selectable inverted table" *ngIf="!this.loading">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Dance Limit</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let availability of availabilityList">
+                <td>
+                    <a [routerLink]="getAvailabilityUrl(availability)">
+                        {{availability.location}}
+                    </a>
+                    
+                </td>
+                <td>{{formatDate(availability.startTime)}}</td>
+                <td>{{formatDate(availability.endTime)}}</td>
+                <td>{{availability.danceLimit}}</td>
+                <td>{{formatDate(availability.created)}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="ui center aligned container" *ngIf="this.loading">
+        <div class="ui active inline text loader">Loading</div>
+    </div>
+</div>

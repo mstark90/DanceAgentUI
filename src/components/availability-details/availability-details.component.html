@@ -1,0 +1,28 @@
+<div class="ui container" *ngIf="this.availability">
+    <br />
+    <h2 class="ui dividing header">
+        {{this.availability.location}} ({{formatDate(availability.startTime)}} - {{formatDate(availability.endTime)}})
+    </h2>
+    <h4 class="ui dividing header">
+        Dances
+    </h4>
+    <table class="ui selectable inverted table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Booking Date/Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dance of danceList">
+                <td>{{dance.name}}</td>
+                <td>{{formatDate(dance.created)}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="ui container" *ngIf="!this.availability">
+    <div class="ui active dimmer">
+        <div class="ui text loader">Loading</div>
+    </div>
+</div>

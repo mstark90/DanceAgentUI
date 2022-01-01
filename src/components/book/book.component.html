@@ -1,0 +1,48 @@
+<div class="ui container">
+    <br />
+    <h2 class="ui dividing header">
+        About
+    </h2>
+    <p>
+        Lately it seems that I've been in high demand for swing dances at Pla-Mor and at Bushwackers, so I'm going to
+        have to take drastic measures to ensure people get a dance in.
+        This means that I'm going to institute a reservation system because I can only dance so much in one night.
+    </p>
+    <p>
+        As much as I would want to fulfill every request when asked, I can't remember them all and sometimes I get
+        pulled on the dance floor trying to fulfill the requests.
+        This way, I feel I can make sure a bit better that everyone who wants a dance can get a dance.
+    </p>
+    <p>
+        Also, I wanted to make an app and I felt this was a good way to do it.
+    </p>
+    <br />
+    <h2 class="ui dividing header">
+        Book a Dance
+    </h2>
+    <form class="ui form">
+        <div class="ui positive message" *ngIf="this.success">
+            Your dance has successfully been booked! Hope to see you there!
+        </div>
+        <div class="ui error message" *ngIf="this.error">
+            {{this.errorMessage}}
+        </div>
+        <div class="field">
+            <label>Upcoming Appearances</label>
+            <select class="ui search dropdown" (change)="setAvailability($event)">
+                <option></option>
+                <option
+                    *ngFor="let availability of availabilityList" value="{{availability.availabilityId}}">
+                    {{availability.dancerName}} - {{availability.location}} ({{availability.startTime}})
+                </option>
+            </select>
+        </div>
+        <div class="field" *ngIf="this.selectedAvailability">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Name" #name>
+        </div>
+        <button class="ui primary button" *ngIf="this.selectedAvailability" type="button" (click)="this.bookDance()">
+            Book
+        </button>
+    </form>
+</div>
