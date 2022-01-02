@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 import { OktaAuthService } from "./okta-auth.service";
 
 export class BaseService {
-    protected baseUrl = 'http://localhost:8080'
+    protected baseUrl = environment.baseUrl;
     constructor(protected http: HttpClient,
         protected oktaAuthService: OktaAuthService) {
 

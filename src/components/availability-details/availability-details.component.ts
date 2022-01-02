@@ -18,6 +18,8 @@ declare var $: any;
 export class AvailabilityDetailsComponent {
     public danceList: DanceRequest[] = [];
     public availability?: Availability;
+    public error = false;
+    public errorMessage = '';
     constructor(private availabilityService: AvailabilityService,
         private activatedRoute: ActivatedRoute,
         private danceService: DancesService) {
@@ -44,8 +46,9 @@ export class AvailabilityDetailsComponent {
             next(params: Params) {
                 
             },
-            error(err) {
-
+            error(error: HttpErrorResponse) {
+                _this.error = true;
+                _this.errorMessage = error.error ? error.error.message : error.message;
             },
             complete() {
                 subscription.unsubscribe();
@@ -57,6 +60,10 @@ export class AvailabilityDetailsComponent {
         return moment(date).format("MM/DD/yyyy hh:mm a");
     }
 
+    getStatusCount(status: string) {
+        return this.danceList.filter(dance => dance.status === status).length;
+    }
+
     loadAvailabilityId(): void {
         const _this = this;
 
@@ -64,8 +71,9 @@ export class AvailabilityDetailsComponent {
             next(params: Params) {
                 _this.loadAvailability(params['availabilityId']);
             },
-            error(err) {
-
+            error(error: HttpErrorResponse) {
+                _this.error = true;
+                _this.errorMessage = error.error ? error.error.message : error.message;
             },
             complete() {
                 subscription.unsubscribe();
@@ -85,7 +93,8 @@ export class AvailabilityDetailsComponent {
                     _this.loadDances();
                 },
                 error(error: HttpErrorResponse) {
-
+                    _this.error = true;
+                    _this.errorMessage = error.error ? error.error.message : error.message;
                 },
                 complete() {
                     subscription.unsubscribe();
@@ -106,7 +115,8 @@ export class AvailabilityDetailsComponent {
                     _this.danceList = danceList;
                 },
                 error(error: HttpErrorResponse) {
-
+                    _this.error = true;
+                    _this.errorMessage = error.error ? error.error.message : error.message;
                 },
                 complete() {
                     subscription.unsubscribe();

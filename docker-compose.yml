@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+    danceagent:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "80"
+        labels:
+            - "traefik.http.services.danceagent-api.loadbalancer.server.port=8080"
+            - "traefik.http.routers.danceagent-api.rule=PathPrefix(`/danceagent`)"
+        networks:
+            - traefik_default
+
+networks:
+  traefik_default:
+    external: true
+    
