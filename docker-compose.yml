@@ -8,8 +8,8 @@ services:
         ports:
             - "80"
         labels:
-            - "traefik.http.services.danceagent-api.loadbalancer.server.port=8080"
-            - "traefik.http.routers.danceagent-api.rule=PathPrefix(`/danceagent`)"
+            - "traefik.http.services.danceagent.loadbalancer.server.port=8080"
+            - "traefik.http.routers.danceagent.rule=PathPrefix(`/danceagent`)"
         networks:
             - traefik_default
 
