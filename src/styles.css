@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'fomantic-ui';
+
+.ui.inverted.dropdown {
+    border: 1px solid #e0e0e0;
+    color: #e0e0e0;
+    background-color: transparent;
+}
+
+.borderless {
+    border: none !important;
+}

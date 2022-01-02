@@ -8,23 +8,49 @@ import { DancesService } from 'src/services/dances.service';
 
 import * as moment from 'moment';
 
+declare var $: any;
+
 @Component({
-  selector: 'app-availability-details',
-  templateUrl: './availability-details.component.html',
-  styleUrls: ['./availability-details.component.css']
+    selector: 'app-availability-details',
+    templateUrl: './availability-details.component.html',
+    styleUrls: ['./availability-details.component.css']
 })
 export class AvailabilityDetailsComponent {
     public danceList: DanceRequest[] = [];
     public availability?: Availability;
     constructor(private availabilityService: AvailabilityService,
-            private activatedRoute: ActivatedRoute,
-            private danceService: DancesService) {
-        
+        private activatedRoute: ActivatedRoute,
+        private danceService: DancesService) {
+
     }
 
     ngOnInit(): void {
 
         this.loadAvailabilityId();
+    }
+
+    updateStatus(dance: DanceRequest, statusSource: EventTarget | null) {
+        if(!statusSource || !this.availability) {
+            return;
+        }
+
+        const status = (<HTMLSelectElement>statusSource).value;
+
+        dance.status = status;
+
+        const _this = this;
+
+        const subscription = this.danceService.update(this.availability.availabilityId, dance).subscribe({
+            next(params: Params) {
+                
+            },
+            error(err) {
+
+            },
+            complete() {
+                subscription.unsubscribe();
+            }
+        });
     }
 
     formatDate(date: Date): string {
@@ -39,12 +65,12 @@ export class AvailabilityDetailsComponent {
                 _this.loadAvailability(params['availabilityId']);
             },
             error(err) {
-                
+
             },
             complete() {
                 subscription.unsubscribe();
             }
-        })
+        });
     }
 
     loadAvailability(availabilityId: number): void {
@@ -68,7 +94,7 @@ export class AvailabilityDetailsComponent {
     }
 
     loadDances(): void {
-        if(!this.availability) {
+        if (!this.availability) {
             return;
         }
 

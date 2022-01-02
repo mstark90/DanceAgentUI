@@ -6,20 +6,31 @@
     <h4 class="ui dividing header">
         Dances
     </h4>
-    <table class="ui selectable inverted table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Booking Date/Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let dance of danceList">
-                <td>{{dance.name}}</td>
-                <td>{{formatDate(dance.created)}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <form class="ui form">
+        <table class="ui selectable inverted table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Booking Date/Time</th>
+                    <th>Dance Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dance of danceList">
+                    <td>{{dance.name}}</td>
+                    <td>{{formatDate(dance.created)}}</td>
+                    <td>
+                        <select class="ui inverted dropdown" (change)="this.updateStatus(dance, $event.target)" [value]="dance.status">
+                            <option value="REQUESTED">Requested</option>
+                            <option value="FULFILLED">Fulfilled</option>
+                            <option value="UNFULFILLED">Unfulfilled</option>
+                            <option value="NO_SHOW">No Show</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 </div>
 <div class="ui container" *ngIf="!this.availability">
     <div class="ui active dimmer">
