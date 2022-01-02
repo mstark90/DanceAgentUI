@@ -3,7 +3,7 @@
 # and open the template in the editor.
 FROM nginx:alpine
 
-COPY dist/danceagent-ui/* /usr/share/nginx/html/
+COPY dist/* /usr/share/nginx/html/
 COPY nginx.conf  /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
