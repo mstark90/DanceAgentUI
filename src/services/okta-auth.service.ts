@@ -2,6 +2,7 @@ import { Observable, Observer } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { OktaAuth, IDToken, AccessToken, UserClaims } from '@okta/okta-auth-js';
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class OktaAuthService {
@@ -11,15 +12,10 @@ export class OktaAuthService {
   // Replace ${yourOktaDomain} with your actual Okta domain
   // If using a custom authorization server, ISSUER should be 'https://${yourOktaDomain}/oauth2/${authorizationServerId}'
 
-  CLIENT_ID = '0oa3eu8m79HimDYhO5d7';
-  ISSUER = 'https://dev-00327502.okta.com/oauth2/default'
-  LOGIN_REDIRECT_URI = 'http://localhost:4200/callback';
-  LOGOUT_REDIRECT_URI = 'http://localhost:4200/';
-
   oktaAuth = new OktaAuth({
-    clientId: this.CLIENT_ID,
-    issuer: this.ISSUER,
-    redirectUri: this.LOGIN_REDIRECT_URI,
+    clientId: environment.clientId,
+    issuer: environment.issuer,
+    redirectUri: environment.loginRedirectUri,
     pkce: true
   });
 
@@ -75,7 +71,7 @@ export class OktaAuthService {
 
   async logout() {
     await this.oktaAuth.signOut({
-      postLogoutRedirectUri: this.LOGOUT_REDIRECT_URI
+      postLogoutRedirectUri: environment.logoutRedirectUri
     });
   }
 }

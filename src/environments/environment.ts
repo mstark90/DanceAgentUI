@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8080'
+  baseUrl: 'http://localhost:8080',
+  clientId: '0oa3eu8m79HimDYhO5d7',
+  issuer: 'https://dev-00327502.okta.com/oauth2/default',
+  loginRedirectUri: 'http://localhost:4200/callback',
+  logoutRedirectUri: 'http://localhost:4200/'
 };
 
 /*
