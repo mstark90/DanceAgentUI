@@ -8,10 +8,12 @@ import { DancesService } from 'src/services/dances.service';
 
 import * as moment from 'moment';
 
+declare var $: any;
+
 @Component({
-  selector: 'app-availability-details',
-  templateUrl: './availability-details.component.html',
-  styleUrls: ['./availability-details.component.css']
+    selector: 'app-availability-details',
+    templateUrl: './availability-details.component.html',
+    styleUrls: ['./availability-details.component.css']
 })
 export class AvailabilityDetailsComponent {
     public danceList: DanceRequest[] = [];
@@ -22,9 +24,9 @@ export class AvailabilityDetailsComponent {
     public errorMessage = '';
 
     constructor(private availabilityService: AvailabilityService,
-            private activatedRoute: ActivatedRoute,
-            private danceService: DancesService) {
-        
+        private activatedRoute: ActivatedRoute,
+        private danceService: DancesService) {
+
     }
 
     ngOnInit(): void {
@@ -32,12 +34,41 @@ export class AvailabilityDetailsComponent {
         this.loadAvailabilityId();
     }
 
-    formatDate(date: Date | undefined): string {
+    updateStatus(dance: DanceRequest, statusSource: EventTarget | null) {
+        if(!statusSource || !this.availability) {
+            return;
+        }
+
+        const status = (<HTMLSelectElement>statusSource).value;
+
+        dance.status = status;
+
+        const _this = this;
+
+        const subscription = this.danceService.update(this.availability.availabilityId, dance).subscribe({
+            next(params: Params) {
+                
+            },
+            error(error: HttpErrorResponse) {
+                _this.error = true;
+                _this.errorMessage = error.error ? error.error.message : error.message;
+            },
+            complete() {
+                subscription.unsubscribe();
+            }
+        });
+    }
+
+    formatDate(date: Date | null): string {
         if(!date) {
             return '';
         }
-
+        
         return moment(date).format("MM/DD/yyyy hh:mm a");
+    }
+
+    getStatusCount(status: string) {
+        return this.danceList.filter(dance => dance.status === status).length;
     }
 
     loadAvailabilityId(): void {
@@ -50,16 +81,14 @@ export class AvailabilityDetailsComponent {
             next(params: Params) {
                 _this.loadAvailability(params['availabilityId']);
             },
-            error(err: HttpErrorResponse) {
-                _this.loading = false;
+            error(error: HttpErrorResponse) {
                 _this.error = true;
-                _this.errorMessage = err.error.message || err.message;
-                
+                _this.errorMessage = error.error ? error.error.message : error.message;
             },
             complete() {
                 subscription.unsubscribe();
             }
-        })
+        });
     }
 
     loadAvailability(availabilityId: number): void {
@@ -86,7 +115,7 @@ export class AvailabilityDetailsComponent {
     }
 
     loadDances(): void {
-        if(!this.availability) {
+        if (!this.availability) {
             return;
         }
 

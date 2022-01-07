@@ -8,6 +8,8 @@ export interface DanceRequest {
     name: string;
     
     created: Date;
+
+    status: string;
 };
 
 export interface BookDanceRequest {

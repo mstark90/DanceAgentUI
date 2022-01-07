@@ -3,6 +3,7 @@ import { Availability } from 'src/models/availability.model';
 import { AvailabilityService } from 'src/services/availability.service';
 
 import * as moment from 'moment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-availability',
@@ -12,6 +13,8 @@ import * as moment from 'moment';
 export class AvailabilityComponent {
     public availabilityList: Availability[] = [];
     public loading = false;
+    public error = false;
+    public errorMessage = '';
     constructor(private availabilityService: AvailabilityService) {
         
     }
@@ -30,8 +33,10 @@ export class AvailabilityComponent {
         const subscription = this.availabilityService.getForUser()
             .subscribe((availabilityList: Availability[]) => {
                 this.availabilityList = availabilityList;
-            }, (error) => {
-
+            }, (error: HttpErrorResponse) => {
+                this.error = true;
+                this.errorMessage = error.message;
+                this.loading = false;
             }, () => {
                 subscription.unsubscribe();
                 this.loading = false;

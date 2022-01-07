@@ -21,4 +21,9 @@ export class DancesService extends BaseService {
         const url = `${this.baseUrl}/availability/${availabilityId}/book`;
         return this.http.post<DanceRequest>(url, request, this.getRequestOptions());
     }
+
+    update(availabilityId: number, request: DanceRequest): Observable<DanceRequest> {
+        const url = `${this.baseUrl}/availability/${availabilityId}/dances`;
+        return this.http.post<DanceRequest>(url, request, this.getRequestOptions());
+    }
 }

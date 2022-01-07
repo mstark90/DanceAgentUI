@@ -9,6 +9,9 @@
             Add
         </a>
     </div>
+    <div class="ui error message" *ngIf="this.error">
+        {{this.errorMessage}}
+    </div>
     <table class="ui selectable inverted table" *ngIf="!this.loading">
         <thead>
             <tr>
