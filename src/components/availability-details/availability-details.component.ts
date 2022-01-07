@@ -16,6 +16,11 @@ import * as moment from 'moment';
 export class AvailabilityDetailsComponent {
     public danceList: DanceRequest[] = [];
     public availability?: Availability;
+
+    public loading = false;
+    public error = false;
+    public errorMessage = '';
+
     constructor(private availabilityService: AvailabilityService,
             private activatedRoute: ActivatedRoute,
             private danceService: DancesService) {
@@ -27,18 +32,28 @@ export class AvailabilityDetailsComponent {
         this.loadAvailabilityId();
     }
 
-    formatDate(date: Date): string {
+    formatDate(date: Date | undefined): string {
+        if(!date) {
+            return '';
+        }
+
         return moment(date).format("MM/DD/yyyy hh:mm a");
     }
 
     loadAvailabilityId(): void {
         const _this = this;
 
+        this.loading = true;
+        this.error = false;
+
         const subscription = this.activatedRoute.params.subscribe({
             next(params: Params) {
                 _this.loadAvailability(params['availabilityId']);
             },
-            error(err) {
+            error(err: HttpErrorResponse) {
+                _this.loading = false;
+                _this.error = true;
+                _this.errorMessage = err.error.message || err.message;
                 
             },
             complete() {
@@ -59,10 +74,13 @@ export class AvailabilityDetailsComponent {
                     _this.loadDances();
                 },
                 error(error: HttpErrorResponse) {
-
+                    _this.loading = false;
+                    _this.error = true;
+                    _this.errorMessage = error.error ? error.error.message : error.message;
                 },
                 complete() {
                     subscription.unsubscribe();
+                    _this.loading = false;
                 }
             });
     }
@@ -80,7 +98,8 @@ export class AvailabilityDetailsComponent {
                     _this.danceList = danceList;
                 },
                 error(error: HttpErrorResponse) {
-
+                    _this.error = true;
+                    _this.errorMessage =  error.error ? error.error.message : error.message;
                 },
                 complete() {
                     subscription.unsubscribe();

@@ -1,7 +1,7 @@
-<div class="ui container" *ngIf="this.availability">
+<div class="ui container" *ngIf="!this.loading && !this.error">
     <br />
     <h2 class="ui dividing header">
-        {{this.availability.location}} ({{formatDate(availability.startTime)}} - {{formatDate(availability.endTime)}})
+        {{this.availability?.location}} ({{formatDate(this.availability?.startTime)}} - {{formatDate(this.availability?.endTime)}})
     </h2>
     <h4 class="ui dividing header">
         Dances
@@ -21,8 +21,11 @@
         </tbody>
     </table>
 </div>
-<div class="ui container" *ngIf="!this.availability">
+<div class="ui container" *ngIf="this.loading && !this.error">
     <div class="ui active dimmer">
         <div class="ui text loader">Loading</div>
     </div>
+</div>
+<div class="ui error message" *ngIf="!this.loading && this.error">
+    {{this.errorMessage}}
 </div>

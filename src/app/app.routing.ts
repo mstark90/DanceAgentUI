@@ -5,6 +5,7 @@ import { CallbackComponent } from 'src/components/callback/callback.component';
 import { AvailabilityDetailsComponent } from 'src/components/availability-details/availability-details.component';
 import { HomeComponent } from 'src/components/home/home.component';
 import { CreateAvailabilityComponent } from 'src/components/create-availability/create-availability.component';
+import { OktaAuthGuard } from './app.guard';
 
 const routes: Routes = [
     {
@@ -14,14 +15,17 @@ const routes: Routes = [
     {
         path: 'availability',
         component: AvailabilityComponent,
+        canActivate: [OktaAuthGuard]
     },
     {
         path: 'availability/create',
         component: CreateAvailabilityComponent,
+        canActivate: [OktaAuthGuard]
     },
     {
         path: 'availability/:availabilityId',
         component: AvailabilityDetailsComponent,
+        canActivate: [OktaAuthGuard]
     },
     {
         path: 'callback',
