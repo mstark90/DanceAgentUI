@@ -8,7 +8,7 @@
             <div class="three wide column">
                 <div class="field">
                     <label>Dance Limit</label>
-                    <span>{{availability.danceLimit}}</span>
+                    <span>{{availability?.danceLimit}}</span>
                 </div>
             </div>
             <div class="three wide column">
@@ -66,11 +66,7 @@
         </table>
     </form>
 </div>
-<<<<<<< HEAD
 <div class="ui container" *ngIf="this.loading && !this.error">
-=======
-<div class="ui container" *ngIf="!this.availability && !this.error">
->>>>>>> cfb94f37f47b9d1e1fa2b34b3b5a3567798b508e
     <div class="ui active dimmer">
         <div class="ui text loader">Loading</div>
     </div>

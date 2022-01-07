@@ -30,7 +30,6 @@ export class AvailabilityDetailsComponent {
     }
 
     ngOnInit(): void {
-
         this.loadAvailabilityId();
     }
 
@@ -59,7 +58,7 @@ export class AvailabilityDetailsComponent {
         });
     }
 
-    formatDate(date: Date | null): string {
+    formatDate(date: Date | undefined): string {
         if(!date) {
             return '';
         }
