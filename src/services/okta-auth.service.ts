@@ -7,11 +7,6 @@ import { environment } from 'src/environments/environment';
 @Injectable({providedIn: 'root'})
 export class OktaAuthService {
 
-  // IMPORTANT!
-  // Replace ${clientId} with your actual Client ID
-  // Replace ${yourOktaDomain} with your actual Okta domain
-  // If using a custom authorization server, ISSUER should be 'https://${yourOktaDomain}/oauth2/${authorizationServerId}'
-
   oktaAuth = new OktaAuth({
     clientId: environment.clientId,
     issuer: environment.issuer,
