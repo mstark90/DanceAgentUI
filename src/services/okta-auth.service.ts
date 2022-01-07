@@ -32,8 +32,8 @@ export class OktaAuthService {
   }
 
   async isAuthenticated() {
-    // Checks if there is a current accessToken in the TokenManger.
-    return !!(await this.oktaAuth.tokenManager.get('accessToken'));
+    const accessToken = await this.oktaAuth.tokenManager.get('accessToken');
+    return !!accessToken && accessToken.expiresAt * 1000 > new Date().getTime();
   }
 
   getAccessToken(): AccessToken {
