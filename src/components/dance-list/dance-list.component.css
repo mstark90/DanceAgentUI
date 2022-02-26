@@ -1,0 +1,8 @@
+table td a {
+    font-weight: 700;
+    color: #000;
+}
+
+table.inverted td a {
+    color: white;
+}

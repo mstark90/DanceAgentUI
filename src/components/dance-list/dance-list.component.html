@@ -1,0 +1,85 @@
+<div class="ui container">
+    <br />
+    <h2 class="ui dividing header">
+        Booked Dances
+    </h2>
+    <div class="ui error message" *ngIf="this.error">
+        {{this.errorMessage}}
+    </div>
+    <table class="ui selectable table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Booked</th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="ui icon input">
+                        <i class="search icon"></i>
+                        <input type="text" id="firstNameFilter" (change)="this.runQuery()" [value]="firstNameFilter" />
+                    </div>
+                </th>
+                <th>
+                    <div class="ui icon input">
+                        <i class="search icon"></i>
+                        <input type="text" id="lastNameFilter" (change)="this.runQuery()" [value]="lastNameFilter" />
+                    </div>
+                </th>
+                <th>
+                    <div class="ui icon input">
+                        <i class="search icon"></i>
+                        <input type="text" id="locationFilter" (change)="this.runQuery()" [value]="locationFilter" />
+                    </div>
+                </th>
+                <th>
+                    <select class="ui dropdown" id="statusFilter" (change)="this.runQuery()"
+                        [value]="statusFilter">
+                        <option value=""></option>
+                        <option value="REQUESTED">Requested</option>
+                        <option value="FULFILLED">Fulfilled</option>
+                        <option value="UNFULFILLED">Unfulfilled</option>
+                        <option value="NO_SHOW">No Show</option>
+                    </select>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dance of danceList">
+                <td>
+                    <a>
+                        {{dance.firstName}}
+                    </a>
+                </td>
+                <td>
+                    <a>
+                        {{dance.lastName}}
+                    </a>
+                </td>
+                <td>
+                    {{dance.availability.location}}
+                    ({{formatDate(dance.availability.startTime)}}
+                    -
+                    {{formatDate(dance.availability.endTime)}})
+                </td>
+                <td>
+                    <app-dance-status [dance]="dance" (success)="this.notifySuccess('')"
+                        (error)="this.notifyError($event)">
+                    </app-dance-status>
+                </td>
+                <td>{{formatDate(dance.created)}}</td>
+            </tr>
+            <tr *ngIf="this.loading">
+                <td colspan="5">
+                    <div class="ui center aligned container">
+                        <div class="ui active inline text loader">Loading</div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

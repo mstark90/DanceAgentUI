@@ -20,8 +20,14 @@ export class BookComponent {
     public error = false;
     public errorMessage = '';
 
-    @ViewChild('name')
-    public nameRef?: ElementRef<HTMLInputElement>;
+    @ViewChild('firstName')
+    public firstNameRef?: ElementRef<HTMLInputElement>;
+
+    @ViewChild('lastName')
+    public lastNameRef?: ElementRef<HTMLInputElement>;
+
+    @ViewChild('emailAddress')
+    public emailAddressRef?: ElementRef<HTMLInputElement>;
 
     constructor(private availabilityService: AvailabilityService,
         private danceService: DancesService) {
@@ -58,7 +64,8 @@ export class BookComponent {
     }
 
     bookDance(): void {
-        if(!this.selectedAvailability || !this.nameRef) {
+        if(!this.selectedAvailability || !this.firstNameRef || !this.lastNameRef
+            || !this.emailAddressRef) {
             this.error = true;
 
             this.errorMessage = 'The form has not been completely filled out.';
@@ -72,7 +79,9 @@ export class BookComponent {
 
         const availabilityId = this.selectedAvailability?.availabilityId || 0;
         const request = {
-            name: this.nameRef?.nativeElement.value || '',
+            firstName: this.firstNameRef?.nativeElement.value || '',
+            lastName: this.lastNameRef?.nativeElement.value || '',
+            emailAddress: this.emailAddressRef?.nativeElement.value || '',
         };
         const _this = this;
 

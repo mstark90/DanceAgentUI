@@ -5,6 +5,9 @@
     <a *ngIf="isAuthenticated" [routerLink]="['/availability']" class="item">
       Availability
     </a>
+    <a *ngIf="isAuthenticated" [routerLink]="['/dances']" class="item">
+      Dances
+    </a>
     <div class="right menu">
       <div *ngIf="isAuthenticated && userClaims" class="ui simple dropdown item" id="userDropdown">
         {{userClaims.name}} <i class="dropdown icon"></i>

@@ -23,6 +23,9 @@ export class AvailabilityDetailsComponent {
     public error = false;
     public errorMessage = '';
 
+    public statusError = false;
+    public statusErrorMessage = '';
+
     constructor(private availabilityService: AvailabilityService,
         private activatedRoute: ActivatedRoute,
         private danceService: DancesService) {
@@ -33,36 +36,21 @@ export class AvailabilityDetailsComponent {
         this.loadAvailabilityId();
     }
 
-    updateStatus(dance: DanceRequest, statusSource: EventTarget | null) {
-        if(!statusSource || !this.availability) {
-            return;
-        }
+    notifyError(errorMessage: string) {
+        this.statusError = true;
+        this.statusErrorMessage = errorMessage;
+    }
 
-        const status = (<HTMLSelectElement>statusSource).value;
-
-        dance.status = status;
-
-        const _this = this;
-
-        const subscription = this.danceService.update(this.availability.availabilityId, dance).subscribe({
-            next(params: Params) {
-                
-            },
-            error(error: HttpErrorResponse) {
-                _this.error = true;
-                _this.errorMessage = error.error ? error.error.message : error.message;
-            },
-            complete() {
-                subscription.unsubscribe();
-            }
-        });
+    notifySuccess(message: string) {
+        this.statusError = false;
+        this.statusErrorMessage = '';
     }
 
     formatDate(date: Date | undefined): string {
-        if(!date) {
+        if (!date) {
             return '';
         }
-        
+
         return moment(date).format("MM/DD/yyyy hh:mm a");
     }
 
@@ -104,7 +92,7 @@ export class AvailabilityDetailsComponent {
                 error(error: HttpErrorResponse) {
                     _this.loading = false;
                     _this.error = true;
-                    _this.errorMessage = error.error ? error.error.message : error.message;
+                    _this.errorMessage = error.error && error.error.message ? error.error.message : error.message;
                 },
                 complete() {
                     subscription.unsubscribe();
@@ -127,7 +115,7 @@ export class AvailabilityDetailsComponent {
                 },
                 error(error: HttpErrorResponse) {
                     _this.error = true;
-                    _this.errorMessage =  error.error ? error.error.message : error.message;
+                    _this.errorMessage = error.error ? error.error.message : error.message;
                 },
                 complete() {
                     subscription.unsubscribe();

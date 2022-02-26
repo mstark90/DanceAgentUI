@@ -12,18 +12,28 @@ export class DancesService extends BaseService {
             super(http, oktaAuthService);
     }
 
+    getForCurrentUser(): Observable<DanceRequest[]> {
+        const url = `${this.baseUrl}/dances`;
+        return this.http.get<DanceRequest[]>(url, this.getRequestOptions());
+    }
+
     getForAvailabilityId(availabilityId: number): Observable<DanceRequest[]> {
         const url = `${this.baseUrl}/availability/${availabilityId}/dances`;
         return this.http.get<DanceRequest[]>(url, this.getRequestOptions());
     }
 
     book(availabilityId: number, request: BookDanceRequest): Observable<DanceRequest> {
-        const url = `${this.baseUrl}/availability/${availabilityId}/book`;
+        const url = `${this.baseUrl}/availability/${availabilityId}/dances`;
         return this.http.post<DanceRequest>(url, request, this.getRequestOptions());
     }
 
-    update(availabilityId: number, request: DanceRequest): Observable<DanceRequest> {
-        const url = `${this.baseUrl}/availability/${availabilityId}/dances`;
+    search(query: string): Observable<DanceRequest[]> {
+        const url = `${this.baseUrl}/dances/search?query=${encodeURIComponent(query)}`;
+        return this.http.get<DanceRequest[]>(url, this.getRequestOptions());
+    }
+
+    update(danceId: number, request: DanceRequest): Observable<DanceRequest> {
+        const url = `${this.baseUrl}/dances/${danceId}`;
         return this.http.post<DanceRequest>(url, request, this.getRequestOptions());
     }
 }

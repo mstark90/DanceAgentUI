@@ -37,9 +37,19 @@
                 </option>
             </select>
         </div>
+        <div class="two fields" *ngIf="this.selectedAvailability">
+            <div class="field">
+                <label>First Name</label>
+                <input type="text" name="firstName" placeholder="First Name" #firstName>
+            </div>
+            <div class="field">
+                <label>Last Name</label>
+                <input type="text" name="lastName" placeholder="Last Name" #lastName>
+            </div>
+        </div>
         <div class="field" *ngIf="this.selectedAvailability">
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Name" #name>
+            <label>Email Address</label>
+            <input type="email" name="emailAddress" placeholder="Email Adress" #emailAddress>
         </div>
         <button class="ui primary button" *ngIf="this.selectedAvailability" type="button" (click)="this.bookDance()">
             Book

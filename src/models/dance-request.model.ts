@@ -5,7 +5,11 @@ export interface DanceRequest {
     
     availability: Availability;
 
-    name: string;
+    firstName: string;
+
+    lastName: string;
+
+    emailAddress: string;
     
     created: Date;
 
@@ -13,5 +17,7 @@ export interface DanceRequest {
 };
 
 export interface BookDanceRequest {
-    name: string;
+    firstName: string;
+    lastName: string;
+    emailAddress: string;
 }
