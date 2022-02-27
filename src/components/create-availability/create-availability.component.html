@@ -19,24 +19,10 @@
             <input type="number" name="danceLimit" placeholder="Dance Limit" value="-1" (change)="this.setValue('danceLimit', $event.target)">
         </div>
         <div class="two fields">
-            <div class="field">
-              <label>Start</label>
-              <div class="ui calendar" id="startTime">
-                <div class="ui input left icon">
-                  <i class="calendar icon"></i>
-                  <input type="text" placeholder="Start" name="startTime" (change)="this.setValue('startTime', $event.target, true)">
-                </div>
-              </div>
-            </div>
-            <div class="field">
-              <label>End</label>
-              <div class="ui calendar" id="endTime">
-                <div class="ui input left icon">
-                  <i class="calendar icon"></i>
-                  <input type="text" placeholder="End" name="endTime" (change)="this.setValue('endTime', $event.target, true)">
-                </div>
-              </div>
-            </div>
+            <app-datepicker label="Start" name="startTime" type="datetime" end="endTime"
+              (dateChanged)="this.setDateValue('startTime', $event)"></app-datepicker>
+            <app-datepicker label="End" name="endTime" type="datetime" start="startTime"
+              (dateChanged)="this.setDateValue('endTime', $event)"></app-datepicker>
           </div>
         <button class="ui primary button" type="button" (click)="this.create()">
             Create

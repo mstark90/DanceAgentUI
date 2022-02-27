@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { DanceListComponent } from 'src/components/dance-list/dance-list.component';
 import { DanceStatusComponent } from 'src/components/dance-status/dance-status.component';
 import { DanceDetailsComponent } from 'src/components/dance-details/dance-details.component';
+import { DatePickerComponent } from 'src/components/datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DanceDetailsComponent } from 'src/components/dance-details/dance-detail
     CreateAvailabilityComponent,
     DanceListComponent,
     DanceStatusComponent,
-    DanceDetailsComponent
+    DanceDetailsComponent,
+    DatePickerComponent
   ],
   imports: [
     CommonModule,

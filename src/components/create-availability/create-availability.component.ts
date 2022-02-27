@@ -63,6 +63,16 @@ export class CreateAvailabilityComponent {
         _request[name] = value;
     }
 
+    setDateValue(name: string, value: moment.Moment) {
+        if(!value) {
+            return;
+        }
+        
+        const _request: any = this.request;
+
+        _request[name] = value.toISOString();
+    }
+
     create(): void {
         const _this = this;
 

@@ -3,8 +3,8 @@
     <h2 class="ui dividing header">
         Availability
     </h2>
-    <div class="ui secondary  menu">
-        <a routerLink="/availability/create" class="item">
+    <div class="ui container">
+        <a routerLink="/availability/create" class="ui blue labeled icon button">
             <i class="plus icon"></i>
             Add
         </a>
@@ -12,7 +12,7 @@
     <div class="ui error message" *ngIf="this.error">
         {{this.errorMessage}}
     </div>
-    <table class="ui selectable inverted table" *ngIf="!this.loading">
+    <table class="ui selectable table" *ngIf="!this.loading">
         <thead>
             <tr>
                 <th>Location</th>
@@ -20,6 +20,26 @@
                 <th>End Time</th>
                 <th>Dance Limit</th>
                 <th>Created</th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="ui icon input">
+                        <i class="search icon"></i>
+                        <input type="text" id="locationFilter" />
+                    </div>
+                </th>
+                <th>
+                    <app-datepicker type="date" name="startDateFilter"></app-datepicker>
+                </th>
+                <th>
+                    <app-datepicker type="date" name="endDateFilter"></app-datepicker>
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
         <tbody>

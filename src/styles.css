@@ -10,3 +10,7 @@
 .borderless {
     border: none !important;
 }
+
+.ui.popup.calendar {
+    padding: 0px !important;
+}

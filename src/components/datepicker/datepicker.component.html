@@ -1,0 +1,10 @@
+<label>
+    {{this.label}}
+</label>
+<div class="ui input left icon" [id]="this.name">
+    <i class="calendar icon"></i>
+    <input type="text" [placeholder]="this.label || ''"
+        [name]="this.name"
+        autocomplete="off"
+        (change)="this.setValue($event.target)" #dateInput />
+</div>
