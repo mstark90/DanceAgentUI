@@ -40,6 +40,10 @@ export class DanceListComponent implements OnInit, AfterViewInit {
         this.loadAll();
     }
 
+    getDetailsUrl(dance: DanceRequest) {
+        return `/dances/${dance.danceRequestId}`;
+    }
+
     hasValue(element: HTMLInputElement | null): boolean {
         return !!element && !!element.value;
     }

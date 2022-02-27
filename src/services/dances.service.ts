@@ -17,6 +17,11 @@ export class DancesService extends BaseService {
         return this.http.get<DanceRequest[]>(url, this.getRequestOptions());
     }
 
+    getForId(danceRequestId: number): Observable<DanceRequest> {
+        const url = `${this.baseUrl}/dances/${danceRequestId}`;
+        return this.http.get<DanceRequest>(url, this.getRequestOptions());
+    }
+
     getForAvailabilityId(availabilityId: number): Observable<DanceRequest[]> {
         const url = `${this.baseUrl}/availability/${availabilityId}/dances`;
         return this.http.get<DanceRequest[]>(url, this.getRequestOptions());

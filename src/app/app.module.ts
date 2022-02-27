@@ -17,7 +17,7 @@ import { CreateAvailabilityComponent } from 'src/components/create-availability/
 import { CommonModule } from '@angular/common';
 import { DanceListComponent } from 'src/components/dance-list/dance-list.component';
 import { DanceStatusComponent } from 'src/components/dance-status/dance-status.component';
-import { DanceListFilterComponent } from 'src/components/dance-list-filter/dance-list-filter.component';
+import { DanceDetailsComponent } from 'src/components/dance-details/dance-details.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { DanceListFilterComponent } from 'src/components/dance-list-filter/dance
     CreateAvailabilityComponent,
     DanceListComponent,
     DanceStatusComponent,
-    DanceListFilterComponent
+    DanceDetailsComponent
   ],
   imports: [
     CommonModule,

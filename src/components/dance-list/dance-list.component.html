@@ -3,6 +3,7 @@
     <h2 class="ui dividing header">
         Booked Dances
     </h2>
+    <br />
     <div class="ui error message" *ngIf="this.error">
         {{this.errorMessage}}
     </div>
@@ -51,12 +52,12 @@
         <tbody>
             <tr *ngFor="let dance of danceList">
                 <td>
-                    <a>
+                    <a [routerLink]="getDetailsUrl(dance)">
                         {{dance.firstName}}
                     </a>
                 </td>
                 <td>
-                    <a>
+                    <a [routerLink]="getDetailsUrl(dance)">
                         {{dance.lastName}}
                     </a>
                 </td>

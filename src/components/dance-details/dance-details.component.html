@@ -1,0 +1,59 @@
+<div class="ui container">
+    <div class="ui error message" *ngIf="this.error">
+        {{this.errorMessage}}
+    </div>
+    <div class="ui error message" *ngIf="this.statusError">
+        {{this.statusErrorMessage}}
+    </div>
+    <br />
+    <h2 class="ui dividing header">
+        Dance Details
+    </h2>
+    <br />
+    <form class="ui form">
+        <div class="two fields">
+            <div class="field">
+                <label>First Name</label>
+                <input type="text" name="firstName" readonly [value]="dance?.firstName">
+            </div>
+            <div class="field">
+                <label>Last Name</label>
+                <input type="text" name="lastName" readonly [value]="dance?.lastName">
+            </div>
+        </div>
+        <div class="field">
+            <label>Email Address</label>
+            <div class="ui action input">
+                <input type="text" name="emailAddress" readonly [value]="dance?.emailAddress">
+                <a [href]="'mailto:'+ dance?.emailAddress" class="ui blue button">
+                    Message
+                </a>
+            </div>
+            
+        </div>
+        <div class="field">
+            <label>Booked</label>
+            <input type="text" name="book" readonly
+            [value]="formatDate(dance?.created)">
+        </div>
+        <h4 class="ui dividing header">
+            Location Details
+        </h4>
+        <div class="field">
+            <label>Location</label>
+            <input type="text" name="location" readonly [value]="dance?.availability?.location">
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>Start</label>
+                <input type="text" name="start" readonly
+                    [value]="formatDate(dance?.availability?.startTime)">
+            </div>
+            <div class="field">
+                <label>End</label>
+                <input type="text" name="end" readonly
+                [value]="formatDate(dance?.availability?.endTime)">
+            </div>
+        </div>
+    </form>
+</div>

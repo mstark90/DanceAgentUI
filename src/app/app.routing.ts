@@ -7,6 +7,7 @@ import { HomeComponent } from 'src/components/home/home.component';
 import { CreateAvailabilityComponent } from 'src/components/create-availability/create-availability.component';
 import { OktaAuthGuard } from './app.guard';
 import { DanceListComponent } from 'src/components/dance-list/dance-list.component';
+import { DanceDetailsComponent } from 'src/components/dance-details/dance-details.component';
 
 const routes: Routes = [
     {
@@ -21,6 +22,11 @@ const routes: Routes = [
     {
         path: 'dances',
         component: DanceListComponent,
+        canActivate: [OktaAuthGuard]
+    },
+    {
+        path: 'dances/:danceRequestId',
+        component: DanceDetailsComponent,
         canActivate: [OktaAuthGuard]
     },
     {
